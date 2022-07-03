@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Video programming!!!!</title>
+    
+</head>
+<body>
+    <h1 align="center">Merging Video Webpage</h1>
+    <h3> Merging Videos</h3>
+
+    <video width="400" controls id="video">
+  <source src="" id="video_here" class="active">
+    Your browser does not support HTML5 video.
+    <source src="" id="newvideo_here" class="">
+</video>
+
+<br><br>
+
+<input type="file" name="file[]" class="file_multi_video" id= "myvid" accept="video/*">
+
+<br><br>
+
+<input type="file" name="file[]new" class="new_file_multi_video" id= "newmyvid" accept="video/*">
+<br>
+<br>
+<br>
+
+
+<script type="text/javascript" src="assets/js/videoEditor.js"></script>
+<script type="text/javascript">
+    var myvid = document.getElementById('myvid');
+var video = document.getElementById('video');
+myvid.addEventListener("change",function(){
+  var source = document.getElementById('video_here');
+  console.log(source);
+  source.src = URL.createObjectURL(this.files[0]);
+  video.load();
+  video.addEventListener('ended', function(e) {
+
+
+
+  // get the active source and the next video source.
+  // I set it so if there's no next, it loops to the first one
+  
+    var activesource = document.querySelector("#video source.active");
+    var nextsource = document.querySelector("#video source.active + source") || document.querySelector("#myvideo source:first-child");
+    console.log("nextsource"+ nextsource);
+  // deactivate current source, and activate next one
+    activesource.className = "";
+    nextsource.className = "active";
+  
+    // update the video source and play
+    video.src = nextsource.src;
+    video.play();
+  
+  });
+});
+
+var myvid = document.getElementById('newmyvid');
+//var video = document.getElementById('video');
+myvid.addEventListener("change",function(){
+  var source = document.getElementById('newvideo_here');
+  console.log(source);
+  source.src = URL.createObjectURL(this.files[0]);
+  console.log(source.src)
+  //video.load();
+});
+
+</script>
+</body>
+</html>
